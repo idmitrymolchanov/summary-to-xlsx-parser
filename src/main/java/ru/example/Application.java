@@ -1,14 +1,19 @@
 package ru.example;
 
-import java.io.IOException;
+import javax.swing.JFileChooser;
 import ru.example.service.ExcelService;
+import ru.example.service.impl.ExcelServiceImpl;
 
 public class Application {
 
-  public static void main(String[] args) throws IOException {
-    ExcelService excelService = new ExcelService();
-    excelService.createWorkbook("/Users/dmolchanov/Desktop/Новая папка/test", "/Users/dmolchanov/Desktop/Новая папка");
-  }
+  public static void main(String[] args) {
+    JFileChooser f = new JFileChooser();
+    f.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+    f.setDialogTitle("Выберите директорию с файлами .summary");
+    f.showOpenDialog(null);
 
+    ExcelService excelService = new ExcelServiceImpl();
+    excelService.createWorkbook(f.getSelectedFile().getPath(), "/Users/dmolchanov/Desktop/Новая папка");
+  }
 
 }
